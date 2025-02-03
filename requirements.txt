@@ -1,0 +1,6 @@
+Rest-RouterOS
+prometheus-client
+fastapi
+gunicorn
+uvicorn-worker
+httpx
