@@ -4,10 +4,11 @@ RUN addgroup -S mktpe && adduser -S mktpe -G mktpe
 
 ENV MKTPE_CONFIG="/mktpe/mktpe.conf"
 WORKDIR /mktpe
-COPY mikrotik_prom_exporter requirements.txt /mktpe/
+COPY mikrotik_prom_exporter /mktpe/mikrotik_prom_exporter/
+COPY requirements.txt /mktpe/
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 EXPOSE 5000
 
 USER mktpe
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "mikrotik-prom-exporter:app", "--chdir", "./mikrotik_prom_exporter/"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "mikrotik-prom-exporter:app", "--chdir", "/mktpe/mikrotik_prom_exporter/"]
