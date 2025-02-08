@@ -24,5 +24,8 @@ class ConfigManager:
         self.config = configparser.ConfigParser(inline_comment_prefixes='#')
         self.config.read(self.config_file)
         
-    def get(self, config_key, config_section = 'MKTPE'):
+    def get(self, config_key, config_section = 'MKTPE', boolean=False):
+        if boolean:
+            return self.config.getboolean(config_section, config_key, fallback=True)
+
         return self.config.get(config_section, config_key, fallback=None)

@@ -14,16 +14,16 @@ class CollectionManager(Collector):
     def __init__(self):
         self.collectors = OrderedDict()
         self.config = ConfigManager()
+        print(self.config.get(ConfigKeys.SSL_VERIFY))
         self.router_identity = {
             ConfigKeys.ROUTERBOARD_ADDRESS: self.config.get(ConfigKeys.HOST_KEY)
         }
-        
         # Create the REST RouterOS for the router
         self.router_api = RestRouterOS(self.config.get(ConfigKeys.HOST_KEY), 
                                        self.config.get(ConfigKeys.USER_KEY), 
                                        self.config.get(ConfigKeys.PASSWD_KEY),
                                        self.config.get(ConfigKeys.PORT_KEY),
-                                       self.config.get(ConfigKeys.SSL_VERIFY),
+                                       self.config.get(ConfigKeys.SSL_VERIFY, True),
                                        self.config.get(ConfigKeys.SSL_CA_PATH))
         
         # Register the collectors
