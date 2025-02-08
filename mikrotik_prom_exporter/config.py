@@ -25,4 +25,4 @@ class ConfigManager:
         self.config.read(self.config_file)
         
     def get(self, config_key, config_section = 'MKTPE'):
-        return self.config[config_section][config_key]
+        return self.config.get(config_section, config_key, fallback=None)
