@@ -22,17 +22,17 @@ class BaseCollector:
                     collector.add_metric(labels, values)
                 return collector
             case "counter":
-                collector = CounterMetricFamily(f"mktpe_{name}", documentation=documentation)
+                collector = CounterMetricFamily(f"mktpe_{name}", documentation=documentation, labels=labels)
                 for record in records:
-                    label_names = [record.get(label) if record.get(label) else '' for label in labels]
-                    collector.add_metric(label_names, record.get(metric_key, 0))
+                    label_values = [record.get(label) if record.get(label) else '' for label in labels]
+                    collector.add_metric(label_values, record.get(metric_key, 0))
                 return collector
             case "gauge":
-                collector = GaugeMetricFamily(f"mktpe_{name}", documentation=documentation)
+                collector = GaugeMetricFamily(f"mktpe_{name}", documentation=documentation, labels=labels)
                 for record in records:
-                    label_names = [record.get(label) if record.get(label) else '' for label in labels]
-                    print(label_names)
-                    collector.add_metric(label_names, record.get(metric_key, 0))
+                    label_values = [record.get(label) if record.get(label) else '' for label in labels]
+                    print(label_values)
+                    collector.add_metric(label_values, record.get(metric_key, 0))
                 return collector
             case _:
                 print("Invalid collector type specified!")
