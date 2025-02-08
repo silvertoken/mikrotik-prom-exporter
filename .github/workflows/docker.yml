@@ -74,5 +74,3 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' || github.event_name == 'release' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-to: type=gha,mode=min
-          cache-from: type=gha
